@@ -67,6 +67,9 @@ namespace CasaDoCodigo.Controllers
       var usuario = await userManager.GetUserAsync(this.User);
 
       pedido.Cadastro.Email = usuario.Email;
+      pedido.Cadastro.Telefone = usuario.Telefone;
+      pedido.Cadastro.Nome = usuario.Nome;
+      pedido.Cadastro.Bairro = usuario.Bairro;
 
       return View(pedido.Cadastro);
     }
@@ -78,6 +81,14 @@ namespace CasaDoCodigo.Controllers
     {
       if (ModelState.IsValid)
       {
+        var usuario = await userManager.GetUserAsync(this.User);
+
+        usuario.Email = cadastro.Email;
+        usuario.Telefone = cadastro.Telefone;
+        usuario.Nome = cadastro.Nome;
+        usuario.Bairro = cadastro.Bairro;
+
+        await userManager.UpdateAsync(usuario);
         return View(await pedidoRepository.UpdateCadastroAsync(cadastro));
       }
       return RedirectToAction("Cadastro");
