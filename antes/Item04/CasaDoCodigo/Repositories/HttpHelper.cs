@@ -12,7 +12,7 @@ namespace CasaDoCodigo
   {
     private readonly IHttpContextAccessor contextAccessor;
     public IConfiguration Configuration { get; }
-    public readonly UserManager<AppIdentityUser> UserManager { get; }
+    private UserManager<AppIdentityUser> UserManager { get; }
 
     public HttpHelper(IHttpContextAccessor contextAccessor, IConfiguration configuration,
                       UserManager<AppIdentityUser> userManager)
